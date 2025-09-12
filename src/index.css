@@ -30,6 +30,11 @@
   font-display: swap;
   src: url("./assets/fonts/DM_Sans/static/DMSans-SemiBold.ttf");
 }
+@font-face {
+  font-family: dm-sans-italic;
+  font-display: swap;
+  src: url("./assets/fonts/DM_Sans/static/DMSans-SemiBoldItalic.ttf");
+}
 
 @theme {
   /* neutral colors */
@@ -51,6 +56,7 @@
   --font-dm-sans-bold: "dm-sans-bold", sans-serif;
   --font-dm-sans-semiBold: "dm-sans-semiBold", sans-serif;
   --font-bricolage: "bricolage", sans-serif;
+  --font-dm-sans-italic: "dm-sans-italic", sans-serif;
 
   --text-present-1: 6rem;
   --text-present-2: 3.25rem;
@@ -90,5 +96,15 @@
   }
   button {
     cursor: pointer;
+  }
+}
+@layer utilities {
+  .bg-today-small {
+    background-image: url("@/assets/images/bg-today-small.svg");
+  }
+}
+@layer components {
+  .current-weather img {
+    @apply w-50;
   }
 }
