@@ -2,38 +2,12 @@ import axios from "axios";
 
 const BASE_URL = "https://api.open-meteo.com/v1/forecast";
 
-export type WeatherDataType = {
-  current: {
-    time: string;
-    temperature_2m: number;
-    apparent_temperature: number;
-    relative_humidity_2m: number;
-    precipitation: number;
-    windspeed_10m: number;
-    weathercode: number;
-  };
-  hourly: {
-    time: string[];
-    temperature_2m: number[];
-    apparent_temperature: number[];
-    relative_humidity_2m: number[];
-    precipitation: number[];
-    weathercode: number[];
-  };
-  daily: {
-    time: string[];
-    temperature_2m_max: number;
-    temperature_2m_min: number;
-    precipitation_sum: number;
-    weathercode: number;
-  };
-};
+import type { WeatherDataType } from "../types/weatherTypes";
 
 export const getWeather = async (
   latitude: number,
   longitude: number
 ): Promise<WeatherDataType> => {
-  console.log("fetched");
   const response = await axios.get<WeatherDataType>(BASE_URL, {
     params: {
       latitude,

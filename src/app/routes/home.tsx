@@ -1,11 +1,8 @@
 import Navbar from "../../components/ui/navbar";
 import SearchForm from "../../components/ui/searchForm";
 import CurrentWeather from "../../components/ui/currentWeather";
-import { useWeather } from "../../context/weatherData";
 
 const Home = () => {
-  const { weatherData } = useWeather();
-  console.log(weatherData);
   return (
     <div className='min-h-screen lg:pt-(--spacing-600) lg:px-(--spacing-1400) px-(--spacing-200) pt-(--spacing-200) lg:pb-(--spacing-1000) pb-(--spacing-600) '>
       <Navbar />

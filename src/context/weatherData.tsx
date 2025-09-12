@@ -1,28 +1,14 @@
 import { createContext, useState, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
-import type { WeatherDataType } from "../api/weather";
 import { getWeather } from "../api/weather";
 import { getCityFromCoords } from "../api/reverseGeocoding";
 
-type LocationType = {
-  lat: number;
-  lon: number;
-};
-type LocationDataType = {
-  city: string;
-  countryName: string;
-};
-type WeatherContextProps = {
-  weatherData: WeatherDataType | undefined;
-  isLoading: boolean;
-  isError: boolean;
-  refetch: () => void;
-  unitType: "metric" | "imperial";
-  setUnitType: (u: "metric" | "imperial") => void;
-  location: LocationType;
-  setLocation: (loc: LocationType) => void;
-  locationData: LocationDataType;
-};
+import type {
+  LocationType,
+  UnitTypeProps,
+  WeatherContextProps,
+} from "../types/weatherTypes";
+
 export const WeatherContext = createContext<WeatherContextProps | undefined>(
   undefined
 );
@@ -36,8 +22,13 @@ export const WeatherContextProvider = ({
     lat: 6.5244,
     lon: 3.3792,
   });
-  const [unitType, setUnitType] = useState<"metric" | "imperial">("metric");
-  const { data: locationData } = useQuery({
+  const [unitType, setUnitType] = useState<UnitTypeProps>({
+    generic: "metric",
+    temperature: "°C",
+    windSpeed: "km/h",
+    precipitation: "mm",
+  });
+  const { data: locationData, isLoading: loadingLocation } = useQuery({
     queryKey: ["location", location],
     queryFn: () => getCityFromCoords(location.lat, location.lon),
     refetchOnWindowFocus: false,
@@ -45,7 +36,7 @@ export const WeatherContextProvider = ({
 
   const {
     data: weatherData,
-    isLoading,
+    isLoading: loadingWeather,
     isError,
     refetch,
   } = useQuery({
@@ -53,7 +44,7 @@ export const WeatherContextProvider = ({
     queryFn: () => getWeather(location.lat, location.lon),
     refetchOnWindowFocus: false,
   });
-
+  const isLoading = loadingLocation || loadingWeather;
   const value = {
     weatherData,
     location,
