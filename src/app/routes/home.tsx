@@ -1,6 +1,7 @@
 import Navbar from "../../components/ui/navbar";
 import SearchForm from "../../components/ui/searchForm";
 import CurrentWeather from "../../components/ui/currentWeather";
+import DailyForcast from "../../components/ui/dailyForecast";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
         </h1>
         <SearchForm />
         <CurrentWeather />
+        <DailyForcast />
       </main>
     </div>
   );

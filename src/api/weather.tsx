@@ -16,8 +16,7 @@ export const getWeather = async (
         "temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,windspeed_10m,weathercode",
       hourly:
         "temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weathercode",
-      daily:
-        "temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode",
+      daily: "temperature_2m_max,temperature_2m_min,weathercode",
       timezone: "auto",
       temperature_unit: "celsius",
       windspeed_unit: "kmh",

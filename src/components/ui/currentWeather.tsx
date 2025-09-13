@@ -16,15 +16,25 @@ const CurrentWeather = () => {
 
   const feelTemperature = formatUnit(
     "°F",
-    "apparent_temperature",
+    weatherData?.current.apparent_temperature ?? 0,
     cToF,
     "temperature"
   );
-  const temperature = formatUnit("°F", "temperature_2m", cToF, "temperature");
-  const windSpeed = formatUnit("mph", "windspeed_10m", kmhToMph, "windSpeed");
+  const temperature = formatUnit(
+    "°F",
+    weatherData?.current.temperature_2m ?? 0,
+    cToF,
+    "temperature"
+  );
+  const windSpeed = formatUnit(
+    "mph",
+    weatherData?.current.windspeed_10m ?? 0,
+    kmhToMph,
+    "windSpeed"
+  );
   const precipitation = formatUnit(
     "inches",
-    "precipitation",
+    weatherData?.current.precipitation ?? 0,
     mmToInch,
     "precipitation"
   );
@@ -32,7 +42,7 @@ const CurrentWeather = () => {
   const weatherCondition = [
     {
       title: "Feels Like",
-      value: `${Math.floor(feelTemperature)}°`,
+      value: `${feelTemperature}°`,
     },
     {
       title: "Humidity",
@@ -64,7 +74,7 @@ const CurrentWeather = () => {
             {weatherCondition.map((condition, index) => (
               <div
                 key={index}
-                className='bg-neutral-800 border-1 flex-1 border-neutral-600 rounded-xl p-(--spacing-250) flex flex-col gap-(--spacing-300)'
+                className='bg-neutral-800 border-1 flex-1 border-neutral-600 rounded-xl p-(--spacing-250) justify-between flex flex-col gap-(--spacing-300)'
               >
                 <h3 className='text-present-6 text-neutral-200'>
                   {condition.title}
