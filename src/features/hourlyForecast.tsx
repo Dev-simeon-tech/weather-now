@@ -24,8 +24,8 @@ const HourlyForecast = () => {
   }, [weatherData]);
 
   return (
-    <section className='rounded-[20px] py-(--spacing-250) px-(--spacing-200) bg-neutral-800'>
-      <div className='flex justify-between items-center'>
+    <section className='rounded-[20px] py-(--spacing-250) px-(--spacing-200) h-[50rem] bg-neutral-800'>
+      <div className='flex justify-between items-center '>
         <h3 className='text-present-5 font-dm-sans-semiBold'>
           Hourly forecast
         </h3>
@@ -37,7 +37,7 @@ const HourlyForecast = () => {
         />
       </div>
 
-      <div className='flex flex-col gap-(--spacing-200)  mt-(--spacing-200)'>
+      <div className='flex scrollbar-thin-thumb flex-col gap-(--spacing-200) h-[93%] overflow-auto mt-(--spacing-200)'>
         {isLoading ? (
           Array.from({ length: 8 }).map((_, index) => (
             <Skeleton
@@ -66,7 +66,7 @@ const HourlyForecast = () => {
                     className='py-(--spacing-150) pl-(--spacing-150) pr-(--spacing-200) rounded-lg border-1 border-neutral-600 bg-neutral-700 flex justify-between items-center'
                   >
                     <div className='flex items-center gap-1'>
-                      <div className='hourly-weather-code text-4xl '>
+                      <div className='hourly-weather-code'>
                         {weatherCodeMap[data.code]}
                       </div>
                       <p className='text-present-5'>

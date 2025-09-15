@@ -6,7 +6,7 @@ import ToggleUnitsCont from "../../features/toggleUnitsCont";
 const Navbar = () => {
   return (
     <header className='flex justify-between'>
-      <Link to='/weather'>
+      <Link to='/'>
         <Logo className='w-40 lg:w-full' />
       </Link>
       <ToggleUnitsCont />

@@ -30,7 +30,7 @@ const useCurrentWeather = () => {
   const weatherCondition = [
     {
       title: "Feels Like",
-      value: `${feelTemperature}°`,
+      value: `${feelTemperature.toFixed(1)}°`,
     },
     {
       title: "Humidity",
@@ -45,7 +45,7 @@ const useCurrentWeather = () => {
     {
       title: "Precipitation",
       value: `${Math.floor(precipitation)} ${
-        unitType.precipitation === "inches" ? "inches" : "mm"
+        unitType.precipitation === "inches" ? "in" : "mm"
       }`,
     },
   ];

@@ -48,7 +48,7 @@ const CurrentWeather = () => {
         <>
           {weatherData && locationData && (
             <section>
-              <div className=' bg-today py-(--spacing-1000) px-(--spacing-300) mt-(--spacing-400) bg-no-repeat bg-center rounded-[1.25rem] w-full bg-cover flex flex-col md:flex-row justify-between items-center'>
+              <div className=' bg-today py-(--spacing-1000) px-(--spacing-300)  bg-no-repeat bg-center rounded-[1.25rem] w-full bg-cover flex flex-col md:flex-row justify-between items-center'>
                 <div className='text-center md:text-left flex flex-col gap-(--spacing-150)'>
                   <h2 className='text-present-4 font-dm-sans-bold'>
                     {locationData.city}, {locationData.countryName}
@@ -56,9 +56,7 @@ const CurrentWeather = () => {
                   <p className='text-present-6'>{currentTime}</p>
                 </div>
                 <div className='flex items-center gap-2 current-weather'>
-                  <div className='text-6xl'>
-                    {weatherCodeMap[weatherData.current.weathercode]}
-                  </div>
+                  <div>{weatherCodeMap[weatherData.current.weathercode]}</div>
                   <h2 className='text-present-1 font-dm-sans-italic'>
                     {`${Math.round(temperature)}°`}
                   </h2>

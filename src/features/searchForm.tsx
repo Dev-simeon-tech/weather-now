@@ -1,21 +1,10 @@
-import { useState, useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { searchLocation } from "../api/geocoding";
-import { GeocodingContext } from "../context/geocodeData";
-
+import { useGeocode } from "../context/geocodeData";
 import SearchInput from "../components/ui/searchInput";
 import SearchButton from "../components/ui/searchButton";
 
 const SearchForm = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const { setGeocodeResult } = useContext(GeocodingContext);
-
-  const { refetch, isFetching } = useQuery({
-    queryKey: ["geocode", searchQuery],
-    queryFn: () => searchLocation(searchQuery),
-    refetchOnWindowFocus: false,
-    enabled: false, // run manually
-  });
+  const { searchQuery, setSearchQuery, setGeocodeResult, refetch, isFetching } =
+    useGeocode();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

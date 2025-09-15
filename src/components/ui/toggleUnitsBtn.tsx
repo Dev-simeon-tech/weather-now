@@ -10,7 +10,7 @@ const ToggleUnitsBtn = ({ onClick, isOpen }: ToggleUnitsBtnProps) => {
   return (
     <button
       onClick={onClick}
-      className='flex cursor-pointer px-(--spacing-125) py-(--spacing-100) lg:py-(--spacing-150) lg:px-(--spacing-200) items-center gap-(--spacing-125) rounded-lg bg-neutral-800'
+      className='flex cursor-pointer px-(--spacing-125) py-(--spacing-100) lg:py-(--spacing-150) md:hover:bg-neutral-700 lg:px-(--spacing-200) items-center gap-(--spacing-125) rounded-lg bg-neutral-800'
     >
       <SettingsIcon />
       <p>Units</p>

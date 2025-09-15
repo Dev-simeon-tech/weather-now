@@ -40,14 +40,14 @@ const DaysDropdown = ({
       )}
 
       {isOpen && (
-        <div className='absolute shadow-1 w-50 top-12 bg-neutral-800 p-(--spacing-100) border-1 border-neutral-600 rounded-xl z-20 right-0'>
+        <div className='absolute shadow-1 w-50 top-12 flex flex-col gap-1 bg-neutral-800 p-(--spacing-100) border-1 border-neutral-600 rounded-xl z-20 right-0'>
           <ListComponent
             data={days}
             renderItem={(day, index) => (
               <button
                 key={index}
                 onClick={() => onSelectDay(day)}
-                className={`w-full text-left px-(--spacing-100) rounded-lg py-(--spacing-125) ${
+                className={`w-full text-left px-(--spacing-100) md:hover:bg-neutral-700 rounded-lg py-(--spacing-125) ${
                   day === selectedDay ? "bg-neutral-700" : ""
                 }`}
               >

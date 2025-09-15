@@ -13,7 +13,7 @@ const DailyForcast = () => {
   return (
     <div className='mt-(--spacing-400)'>
       <h3 className='text-present-5 font-dm-sans-semiBold'>Daily forecast</h3>
-      <div className='mt-(--spacing-250) grid grid-cols-3 md:grid-cols-7 gap-(--spacing-200)'>
+      <div className='mt-(--spacing-250) grid grid-cols-3 max-[320px]:grid-cols-2 md:grid-cols-7 gap-(--spacing-200)'>
         {isLoading ? (
           Array.from({ length: 6 }).map((_, index) => (
             <Skeleton
@@ -43,7 +43,7 @@ const DailyForcast = () => {
                       {format(new Date(data), "EEE")}
                     </p>
 
-                    <div className='text-5xl daily-weather-icon text-center'>
+                    <div className='daily-weather-icon'>
                       {weatherCodeMap[weatherData.daily.weathercode[index]]}
                     </div>
 

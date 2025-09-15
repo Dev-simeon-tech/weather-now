@@ -103,6 +103,21 @@
   .bg-today {
     background-image: url("@/assets/images/bg-today-small.svg");
   }
+  .scrollbar-thin-thumb {
+    /* scrollbar-width: thin; */
+    scrollbar-color: hsl(243, 23%, 24%) transparent;
+  }
+  /* Chrome/Edge/Safari */
+  .scrollbar-thin-thumb::-webkit-scrollbar {
+    width: 8px;
+  }
+  .scrollbar-thin-thumb::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin-thumb::-webkit-scrollbar-thumb {
+    background-color: hsl(243, 23%, 24%);
+    /* border-radius: 9999px; */
+  }
 }
 @layer components {
   .current-weather img {
@@ -117,7 +132,7 @@
     animation: l3 1s infinite linear;
   }
   .unit-btn.activeUnit {
-    @apply bg-neutral-700 rounded-lg;
+    @apply bg-neutral-700;
   }
   .unit-btn svg {
     display: none;
@@ -126,7 +141,7 @@
     display: block;
   }
   .hourly-weather-code img {
-    @apply w-15;
+    @apply w-10;
   }
 }
 @keyframes l3 {

@@ -1,10 +1,16 @@
 import { createContext, useState, useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { searchLocation } from "../api/geocoding";
 
 type GeocodingContextType = {
   geocodeResult: GeocodeResultsType | null;
   setGeocodeResult: React.Dispatch<
     React.SetStateAction<GeocodeResultsType | null>
   >;
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  refetch: () => Promise<any>;
+  isFetching: boolean;
 };
 export type GeocodeType = {
   latitude: number;
@@ -23,6 +29,12 @@ export type GeocodeResultsType = {
 export const GeocodingContext = createContext<GeocodingContextType>({
   geocodeResult: null,
   setGeocodeResult: () => {},
+  searchQuery: "",
+  setSearchQuery: () => {},
+  refetch: () => {
+    return Promise.resolve();
+  },
+  isFetching: false,
 });
 
 export const GeocodingContextProvider = ({
@@ -33,10 +45,21 @@ export const GeocodingContextProvider = ({
   const [geocodeResult, setGeocodeResult] = useState<GeocodeResultsType | null>(
     null
   );
+  const [searchQuery, setSearchQuery] = useState("");
+  const { refetch, isFetching } = useQuery({
+    queryKey: ["geocode", searchQuery],
+    queryFn: () => searchLocation(searchQuery),
+    refetchOnWindowFocus: false,
+    enabled: false, // run manually
+  });
 
   const value = {
     setGeocodeResult,
     geocodeResult,
+    searchQuery,
+    setSearchQuery,
+    refetch,
+    isFetching,
   };
   return (
     <GeocodingContext.Provider value={value}>
@@ -44,7 +67,7 @@ export const GeocodingContextProvider = ({
     </GeocodingContext.Provider>
   );
 };
-export const useGeoding = () => {
+export const useGeocode = () => {
   const ctx = useContext(GeocodingContext);
   if (!ctx) throw new Error("useWeather must be used within WeatherProvider");
   return ctx;
