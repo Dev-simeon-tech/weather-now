@@ -44,7 +44,7 @@ export const WeatherContextProvider = ({
     queryFn: () => getWeather(location.lat, location.lon),
     refetchOnWindowFocus: false,
   });
-  const isLoading = loadingLocation || loadingWeather;
+  const isLoading = loadingLocation && loadingWeather;
   const value = {
     weatherData,
     location,

@@ -29,7 +29,7 @@ const SearchDropdown = ({ loading }: SearchDropdownProps) => {
   return (
     <>
       {loading ? (
-        <div className='flex gap-(--spacing-125) items-center w-full absolute -bottom-15 bg-neutral-800 border-1 p-(--spacing-100) rounded-xl border-neutral-700'>
+        <div className='flex gap-(--spacing-125) md:top-18 top-35 left-0 items-center w-full absolute  bg-neutral-800 border-1 p-(--spacing-100) rounded-xl border-neutral-700'>
           <LoadingIcon />
           <p>Search in progress</p>
         </div>
@@ -38,7 +38,7 @@ const SearchDropdown = ({ loading }: SearchDropdownProps) => {
           {geocodeResult?.results && (
             <div
               ref={dropdownRef}
-              className='w-full flex-col flex absolute bg-neutral-800 border-1 p-(--spacing-100) rounded-xl border-neutral-700'
+              className='w-full flex-col flex absolute top-20 left-0 bg-neutral-800 border-1 p-(--spacing-100) rounded-xl border-neutral-700'
             >
               <ListComponent
                 data={geocodeResult?.results}

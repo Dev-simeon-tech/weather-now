@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
-import { useClickOutside } from "../../hooks/useClickOutside";
+import { useClickOutside } from "../hooks/useClickOutside";
 
-import ToggleUnitsBtn from "./toggleUnitsBtn";
-import UnitDropdown from "./unitDropdown";
+import ToggleUnitsBtn from "../components/ui/toggleUnitsBtn";
+import UnitDropdown from "../components/ui/unitDropdown";
 
 const ToggleUnitsCont = () => {
   const [isOpen, setIsOpen] = useState(false);

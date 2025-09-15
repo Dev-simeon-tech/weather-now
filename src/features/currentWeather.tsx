@@ -1,72 +1,32 @@
-import { useWeather } from "../../context/weatherData";
+import { useWeather } from "../context/weatherData";
 import { format } from "date-fns";
-import { formatUnit } from "../../utils/formatUnit";
-import { weatherCodeMap } from "../../utils/weatherCodeMap";
+import { formatUnit } from "../utils/formatUnit";
+import { weatherCodeMap } from "../utils/weatherCodeMap";
+import useCurrentWeather from "../hooks/useCurrentWeather";
 
-import { cToF } from "../../utils/unitsConversion";
-import { kmhToMph } from "../../utils/unitsConversion";
-import { mmToInch } from "../../utils/unitsConversion";
+import { cToF } from "../utils/unitsConversion";
 
 const CurrentWeather = () => {
   const { weatherData, locationData, isLoading, unitType } = useWeather();
+  const { weatherCondition } = useCurrentWeather();
 
   const currentTime = weatherData?.current.time
     ? format(new Date(weatherData.current.time), "EEEE, MMM d, yyyy")
     : "";
 
-  const feelTemperature = formatUnit(
-    "°F",
-    weatherData?.current.apparent_temperature ?? 0,
-    cToF,
-    "temperature"
-  );
   const temperature = formatUnit(
     "°F",
     weatherData?.current.temperature_2m ?? 0,
     cToF,
-    "temperature"
+    "temperature",
+    unitType
   );
-  const windSpeed = formatUnit(
-    "mph",
-    weatherData?.current.windspeed_10m ?? 0,
-    kmhToMph,
-    "windSpeed"
-  );
-  const precipitation = formatUnit(
-    "inches",
-    weatherData?.current.precipitation ?? 0,
-    mmToInch,
-    "precipitation"
-  );
-
-  const weatherCondition = [
-    {
-      title: "Feels Like",
-      value: `${feelTemperature}°`,
-    },
-    {
-      title: "Humidity",
-      value: `${weatherData?.current.relative_humidity_2m}%`,
-    },
-    {
-      title: "Wind",
-      value: `${Math.floor(windSpeed)} ${
-        unitType.windSpeed === "mph" ? "mph" : "km/h"
-      }`,
-    },
-    {
-      title: "Precipitation",
-      value: `${Math.floor(precipitation)} ${
-        unitType.precipitation === "inches" ? "inches" : "mm"
-      }`,
-    },
-  ];
 
   return (
     <>
       {isLoading ? (
         <div>
-          <div className='w-full mt-(--spacing-400) bg-neutral-800 flex flex-col gap-4 justify-center items-center h-[17rem] rounded-[1.25rem]'>
+          <div className='w-full bg-neutral-800 flex flex-col gap-4 justify-center items-center h-[17rem] rounded-[1.25rem]'>
             <div className='dot-loader'></div>
             <p className='text-neutral-200 text-present-6'>Loading...</p>
           </div>
@@ -88,8 +48,8 @@ const CurrentWeather = () => {
         <>
           {weatherData && locationData && (
             <section>
-              <div className=' bg-today-small p-8 mt-(--spacing-400) bg-no-repeat bg-center rounded-[1.25rem] w-full bg-cover flex flex-col justify-between items-center'>
-                <div className='text-center'>
+              <div className=' bg-today py-(--spacing-1000) px-(--spacing-300) mt-(--spacing-400) bg-no-repeat bg-center rounded-[1.25rem] w-full bg-cover flex flex-col md:flex-row justify-between items-center'>
+                <div className='text-center md:text-left flex flex-col gap-(--spacing-150)'>
                   <h2 className='text-present-4 font-dm-sans-bold'>
                     {locationData.city}, {locationData.countryName}
                   </h2>
@@ -109,7 +69,7 @@ const CurrentWeather = () => {
                 {weatherCondition.map((condition, index) => (
                   <div
                     key={index}
-                    className='bg-neutral-800 border-1 flex-1 border-neutral-600 rounded-xl p-(--spacing-250) flex flex-col gap-(--spacing-300)'
+                    className='bg-neutral-800 border-1 border-neutral-600 flex-1 rounded-xl p-(--spacing-250) md:min-w-auto min-w-[40%] flex flex-col justify-between gap-(--spacing-300)'
                   >
                     <h3 className='text-present-6 text-neutral-200'>
                       {condition.title}

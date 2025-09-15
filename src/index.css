@@ -86,6 +86,7 @@
   --spacing-1400: 7rem;
   --spacing-1600: 8rem;
   --spacing-1800: 8.75;
+  --shadow-1: 0px 8px 16px 0px hsl(241, 96%, 9%, 0.32);
 }
 
 @layer base {
@@ -99,7 +100,7 @@
   }
 }
 @layer utilities {
-  .bg-today-small {
+  .bg-today {
     background-image: url("@/assets/images/bg-today-small.svg");
   }
 }
@@ -124,6 +125,9 @@
   .unit-btn.activeUnit svg {
     display: block;
   }
+  .hourly-weather-code img {
+    @apply w-15;
+  }
 }
 @keyframes l3 {
   20% {
@@ -137,5 +141,10 @@
   }
   80% {
     background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
+}
+@media (min-width: 48rem) {
+  .bg-today {
+    background-image: url("@/assets/images/bg-today-large.svg");
   }
 }

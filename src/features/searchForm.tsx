@@ -1,11 +1,10 @@
 import { useState, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { searchLocation } from "../../api/geocoding";
-import { GeocodingContext } from "../../context/geocodeData";
+import { searchLocation } from "../api/geocoding";
+import { GeocodingContext } from "../context/geocodeData";
 
-import SearchInput from "./searchInput";
-import SearchButton from "./searchButton";
-import SearchDropdown from "./searchDropdown";
+import SearchInput from "../components/ui/searchInput";
+import SearchButton from "../components/ui/searchButton";
 
 const SearchForm = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,15 +27,18 @@ const SearchForm = () => {
   };
 
   return (
-    <div className='relative'>
-      <form onSubmit={handleSubmit}>
+    <div className='lg:w-[42rem] mx-auto'>
+      <form
+        className='md:flex gap-(--spacing-200) items-center'
+        onSubmit={handleSubmit}
+      >
         <SearchInput
+          isFetching={isFetching}
           setSearchValue={setSearchQuery}
           searchValue={searchQuery}
         />
         <SearchButton />
       </form>
-      <SearchDropdown loading={isFetching} />
     </div>
   );
 };

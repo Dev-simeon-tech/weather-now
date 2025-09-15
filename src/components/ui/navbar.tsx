@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 
 import Logo from "@/assets/images/logo.svg?react";
-import ToggleUnitsCont from "./toggleUnitsCont";
+import ToggleUnitsCont from "../../features/toggleUnitsCont";
 
 const Navbar = () => {
   return (
