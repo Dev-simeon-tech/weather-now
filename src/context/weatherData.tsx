@@ -1,7 +1,8 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getWeather } from "../api/weather";
 import { getCityFromCoords } from "../api/reverseGeocoding";
+import { useUserLocation } from "../hooks/useUserLocation";
 
 import type {
   LocationType,
@@ -18,9 +19,10 @@ export const WeatherContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const { userLocation } = useUserLocation();
   const [location, setLocation] = useState<LocationType>({
-    lat: 6.5244,
-    lon: 3.3792,
+    lat: 52.52437,
+    lon: 13.41053,
   });
   const [unitType, setUnitType] = useState<UnitTypeProps>({
     generic: "metric",
@@ -28,23 +30,40 @@ export const WeatherContextProvider = ({
     windSpeed: "km/h",
     precipitation: "mm",
   });
-  const { data: locationData, isLoading: loadingLocation } = useQuery({
+  useEffect(() => {
+    setLocation(userLocation);
+  }, [userLocation]);
+
+  const {
+    data: locationData,
+    isLoading: loadingLocation,
+    isError: errorLocation,
+    refetch: refetchLocation,
+  } = useQuery({
     queryKey: ["location", location],
     queryFn: () => getCityFromCoords(location.lat, location.lon),
     refetchOnWindowFocus: false,
+    retry: 1,
   });
 
   const {
     data: weatherData,
     isLoading: loadingWeather,
-    isError,
-    refetch,
+    isError: errorWeather,
+    refetch: refetchWeather,
   } = useQuery({
     queryKey: ["weather", location],
     queryFn: () => getWeather(location.lat, location.lon),
     refetchOnWindowFocus: false,
+    retry: 1,
   });
+
   const isLoading = loadingLocation && loadingWeather;
+  const isError = errorLocation || errorWeather;
+  const refetch = () => {
+    refetchLocation();
+    refetchWeather();
+  };
   const value = {
     weatherData,
     location,

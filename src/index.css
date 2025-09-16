@@ -105,18 +105,18 @@
   }
   .scrollbar-thin-thumb {
     /* scrollbar-width: thin; */
-    scrollbar-color: hsl(243, 23%, 24%) transparent;
+    scrollbar-color: var(--color-neutral-600) transparent;
   }
   /* Chrome/Edge/Safari */
   .scrollbar-thin-thumb::-webkit-scrollbar {
     width: 8px;
   }
+
   .scrollbar-thin-thumb::-webkit-scrollbar-track {
     background: transparent;
   }
   .scrollbar-thin-thumb::-webkit-scrollbar-thumb {
-    background-color: hsl(243, 23%, 24%);
-    /* border-radius: 9999px; */
+    background-color: var(--color-neutral-600);
   }
 }
 @layer components {

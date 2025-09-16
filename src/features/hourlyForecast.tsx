@@ -63,7 +63,7 @@ const HourlyForecast = () => {
                 renderItem={(data, index) => (
                   <div
                     key={index}
-                    className='py-(--spacing-150) pl-(--spacing-150) pr-(--spacing-200) rounded-lg border-1 border-neutral-600 bg-neutral-700 flex justify-between items-center'
+                    className='py-(--spacing-100) pl-(--spacing-150) pr-(--spacing-200) rounded-lg border-1 border-neutral-600 bg-neutral-700 flex justify-between items-center'
                   >
                     <div className='flex items-center gap-1'>
                       <div className='hourly-weather-code'>

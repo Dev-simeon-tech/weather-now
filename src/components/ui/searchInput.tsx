@@ -19,7 +19,7 @@ const SearchInput = ({
     >
       <SearchIcon />
       <input
-        placeholder='Search for a place...'
+        placeholder='Search for a city e.g new york...'
         className='w-full focus-visible:outline-none  text-neutral-200'
         type='text'
         onChange={(e) => setSearchValue(e.target.value)}

@@ -57,7 +57,7 @@ const UnitDropdown = () => {
   };
 
   return (
-    <div className='px-(--spacing-100) shadow-1 absolute min-w-[13.375rem] top-15 rounded-xl z-30 right-0 py-(--spacing-075) border-1 border-neutral-600 bg-neutral-800'>
+    <div className='px-(--spacing-100) shadow-1 absolute w-[13.375rem] lg:w-[15rem] top-15 rounded-xl z-30 right-0 py-(--spacing-075) border-1 border-neutral-600 bg-neutral-800'>
       <button
         onClick={handleGenericUnitChange}
         className='text-present-7 w-full text-left rounded-lg md:hover:bg-neutral-700 focus-visible:rouded   px-(--spacing-100) py-(--spacing-150)'
