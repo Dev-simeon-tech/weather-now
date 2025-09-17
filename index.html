@@ -2,10 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link
+      rel="preload"
+      as="image"
+      href="/src/assets/images/bg-today-large.svg"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/src/assets/images/bg-today-small.svg"
+      fetchpriority="high"
+    />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Weather now App" />
+
+    <!-- Home screen icon -->
+    <link rel="apple-touch-icon" href="/weather-logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/weather-logo.png" />
+
+    <meta
+      name="description"
+      content="Accurate hourly and daily forecasts with real-time weather updates at your fingertips."
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/src/index.css" />
-    <title>Frontend Mentor | Weather app</title>
+    <title>Weather now app</title>
   </head>
   <body>
     <div id="root"></div>

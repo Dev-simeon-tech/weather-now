@@ -11,7 +11,6 @@ type GeocodingContextType = {
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
   refetch: () => Promise<any>;
   isFetching: boolean;
-  isError: boolean;
 };
 export type GeocodeType = {
   latitude: number;
@@ -36,7 +35,6 @@ export const GeocodingContext = createContext<GeocodingContextType>({
     return Promise.resolve();
   },
   isFetching: false,
-  isError: false,
 });
 
 export const GeocodingContextProvider = ({
@@ -48,7 +46,7 @@ export const GeocodingContextProvider = ({
     null
   );
   const [searchQuery, setSearchQuery] = useState("");
-  const { refetch, isFetching, isError } = useQuery({
+  const { refetch, isFetching } = useQuery({
     queryKey: ["geocode", searchQuery],
     queryFn: () => searchLocation(searchQuery),
     refetchOnWindowFocus: false,
@@ -62,7 +60,6 @@ export const GeocodingContextProvider = ({
     setSearchQuery,
     refetch,
     isFetching,
-    isError,
   };
   return (
     <GeocodingContext.Provider value={value}>

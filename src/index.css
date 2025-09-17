@@ -99,6 +99,7 @@
     cursor: pointer;
   }
 }
+
 @layer utilities {
   .bg-today {
     background-image: url("@/assets/images/bg-today-small.svg");

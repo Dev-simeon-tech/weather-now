@@ -58,7 +58,7 @@ export const WeatherContextProvider = ({
     retry: 1,
   });
 
-  const isLoading = loadingLocation && loadingWeather;
+  const isLoading = loadingLocation || loadingWeather;
   const isError = errorLocation || errorWeather;
   const refetch = () => {
     refetchLocation();
