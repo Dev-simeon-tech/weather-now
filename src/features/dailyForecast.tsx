@@ -15,7 +15,7 @@ const DailyForcast = () => {
       <h3 className='text-present-5 font-dm-sans-semiBold'>Daily forecast</h3>
       <div className='mt-(--spacing-250) grid grid-cols-3 max-[320px]:grid-cols-2 md:grid-cols-7 gap-(--spacing-200)'>
         {isLoading ? (
-          Array.from({ length: 6 }).map((_, index) => (
+          Array.from({ length: 7 }).map((_, index) => (
             <Skeleton
               key={index}
               variant='rectangular'

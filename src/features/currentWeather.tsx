@@ -26,7 +26,7 @@ const CurrentWeather = () => {
     <>
       {isLoading ? (
         <div>
-          <div className='w-full bg-neutral-800 flex flex-col gap-4 justify-center items-center h-[17rem] rounded-[1.25rem]'>
+          <div className='w-full bg-neutral-800 flex flex-col gap-4 justify-center items-center h-[20rem] rounded-[1.25rem]'>
             <div className='dot-loader'></div>
             <p className='text-neutral-200 text-present-6'>Loading...</p>
           </div>

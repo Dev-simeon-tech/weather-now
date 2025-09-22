@@ -17,7 +17,7 @@ const Home = () => {
     return (
       <div className='min-h-screen lg:pt-(--spacing-600) 2xl:px-(--spacing-1400) lg:px-(--spacing-600) px-(--spacing-200) pt-(--spacing-200) lg:pb-(--spacing-1000) pb-(--spacing-600)'>
         <Navbar />
-        <ApiErrorLayout refetch={refetch} />;
+        <ApiErrorLayout refetch={refetch} />
       </div>
     );
   }
@@ -36,7 +36,7 @@ const Home = () => {
           </h2>
         ) : (
           <WeatherDashboard>
-            <div>
+            <div className='lg:flex flex-col justify-between'>
               <CurrentWeather />
               <DailyForcast />
             </div>

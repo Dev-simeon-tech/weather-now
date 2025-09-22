@@ -3,7 +3,7 @@ import RetryIcon from "@/assets/images/icon-retry.svg?react";
 
 const ApiErrorLayout = ({ refetch }: { refetch: () => void }) => {
   return (
-    <div className='flex flex-col gap-(--spacing-300) items-center pt-(--spacing-500)'>
+    <div className='flex flex-col gap-(--spacing-300) text-center items-center pt-(--spacing-500)'>
       <ErrorIcon width={"3rem"} height={"3rem"} />
       <h1 className='text-present-2 font-bricolage'>Something went wrong</h1>
       <p className='text-present-5 max-w-[40ch] text-center'>

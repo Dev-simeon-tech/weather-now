@@ -104,21 +104,6 @@
   .bg-today {
     background-image: url("@/assets/images/bg-today-small.svg");
   }
-  .scrollbar-thin-thumb {
-    /* scrollbar-width: thin; */
-    scrollbar-color: var(--color-neutral-600) transparent;
-  }
-  /* Chrome/Edge/Safari */
-  .scrollbar-thin-thumb::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .scrollbar-thin-thumb::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .scrollbar-thin-thumb::-webkit-scrollbar-thumb {
-    background-color: var(--color-neutral-600);
-  }
 }
 @layer components {
   .current-weather img {
@@ -144,6 +129,9 @@
   .hourly-weather-code img {
     @apply w-10;
   }
+  .daily-weather-icon {
+    @apply lg:w-18 mx-auto;
+  }
 }
 @keyframes l3 {
   20% {
@@ -162,5 +150,29 @@
 @media (min-width: 48rem) {
   .bg-today {
     background-image: url("@/assets/images/bg-today-large.svg");
+  }
+}
+/* Chrome/Edge/Safari */
+@supports selector(::-webkit-scrollbar) {
+  .scrollbar-thin-thumb::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin-thumb::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  .scrollbar-thin-thumb::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  .scrollbar-thin-thumb::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin-thumb::-webkit-scrollbar-thumb {
+    background-color: var(--color-neutral-600);
+    border: none;
+    border-radius: 4px;
   }
 }
