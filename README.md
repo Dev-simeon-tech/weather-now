@@ -41,8 +41,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://www.frontendmentor.io/solutions/weather-now-pwa-NFE_K2bOGY)
-- Live Site URL: [Add live site URL here](https://weather-now-ose-app.vercel.app/)
+- Solution URL: [Solution URL](https://www.frontendmentor.io/solutions/weather-now-pwa-NFE_K2bOGY)
+- Live Site URL: [Live site URl](https://weather-now-ose-app.vercel.app/)
 
 ## My process
 
