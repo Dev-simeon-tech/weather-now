@@ -1,7 +1,6 @@
 import { useContext, useRef } from "react";
 import { GeocodingContext } from "../../context/geocodeData";
 import ListComponent from "./listComponent";
-import { useWeather } from "../../context/weatherData";
 import { useClickOutside } from "../../hooks/useClickOutside";
 
 import type { GeocodeType } from "../../context/geocodeData";
@@ -12,19 +11,24 @@ type SearchDropdownProps = {
 };
 
 const SearchDropdown = ({ loading }: SearchDropdownProps) => {
-  const { geocodeResult, setGeocodeResult } = useContext(GeocodingContext);
-  const { setLocation } = useWeather();
+  const {
+    geocodeResult,
+    setGeocodeResult,
+    setSearchQuery,
+    setEnabled,
+    enabled,
+  } = useContext(GeocodingContext);
   const dropdownRef = useRef(null);
+
   useClickOutside(dropdownRef, () => {
-    setGeocodeResult(null);
+    if (enabled) {
+      setGeocodeResult(null);
+    }
   });
 
   const onSelect = (result: GeocodeType) => {
-    setLocation({
-      lat: result.latitude,
-      lon: result.longitude,
-    });
-    setGeocodeResult(null);
+    setSearchQuery(`${result.name}, ${result.country}`);
+    setEnabled(false);
   };
   return (
     <>
@@ -35,7 +39,7 @@ const SearchDropdown = ({ loading }: SearchDropdownProps) => {
         </div>
       ) : (
         <>
-          {geocodeResult?.results && (
+          {geocodeResult?.results && enabled && (
             <div
               ref={dropdownRef}
               className='w-full flex-col flex absolute top-20 left-0 bg-neutral-800 border-1 p-(--spacing-100) rounded-xl border-neutral-700'
@@ -44,6 +48,7 @@ const SearchDropdown = ({ loading }: SearchDropdownProps) => {
                 data={geocodeResult?.results}
                 renderItem={(result, index) => (
                   <button
+                    type='button'
                     onClick={() => onSelect(result)}
                     className='text-left px-(--spacing-100) hover:bg-neutral-700 border-1 border-transparent rounded-lg hover:border-neutral-600  py-(--spacing-125)'
                     key={index}

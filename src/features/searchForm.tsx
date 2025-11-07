@@ -1,17 +1,35 @@
 import { useGeocode } from "../context/geocodeData";
+import { useWeather } from "../context/weatherData";
 import SearchInput from "../components/ui/searchInput";
 import SearchButton from "../components/ui/searchButton";
 
 const SearchForm = () => {
-  const { searchQuery, setSearchQuery, setGeocodeResult, refetch, isFetching } =
-    useGeocode();
+  const {
+    searchQuery,
+    setSearchQuery,
+    setGeocodeResult,
+    isFetching,
+    geocodeResult,
+    setEnabled,
+  } = useGeocode();
+  const { setLocation } = useWeather();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!searchQuery) return setGeocodeResult(null);
-    const result = await refetch();
-    if (result.data) {
-      setGeocodeResult(result.data);
+
+    if (!searchQuery) return;
+    const selectedResult = geocodeResult?.results.find(
+      (result) =>
+        `${result.name}, ${result.country}`.toLowerCase() ===
+        searchQuery.toLowerCase()
+    );
+
+    if (selectedResult) {
+      setLocation({
+        lat: selectedResult.latitude,
+        lon: selectedResult.longitude,
+      });
+      setGeocodeResult(null);
     }
   };
 
@@ -25,6 +43,7 @@ const SearchForm = () => {
           isFetching={isFetching}
           setSearchValue={setSearchQuery}
           searchValue={searchQuery}
+          setEnabled={setEnabled}
         />
         <SearchButton />
       </form>

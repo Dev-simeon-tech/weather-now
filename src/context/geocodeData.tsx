@@ -1,6 +1,7 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { searchLocation } from "../api/geocoding";
+import { useDebounce } from "../hooks/useDebounce";
 
 type GeocodingContextType = {
   geocodeResult: GeocodeResultsType | null;
@@ -9,8 +10,9 @@ type GeocodingContextType = {
   >;
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  refetch: () => Promise<any>;
   isFetching: boolean;
+  setEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+  enabled?: boolean;
 };
 export type GeocodeType = {
   latitude: number;
@@ -31,10 +33,9 @@ export const GeocodingContext = createContext<GeocodingContextType>({
   setGeocodeResult: () => {},
   searchQuery: "",
   setSearchQuery: () => {},
-  refetch: () => {
-    return Promise.resolve();
-  },
   isFetching: false,
+  setEnabled: () => {},
+  enabled: true,
 });
 
 export const GeocodingContextProvider = ({
@@ -46,20 +47,29 @@ export const GeocodingContextProvider = ({
     null
   );
   const [searchQuery, setSearchQuery] = useState("");
-  const { refetch, isFetching } = useQuery({
-    queryKey: ["geocode", searchQuery],
-    queryFn: () => searchLocation(searchQuery),
+  const [enabled, setEnabled] = useState(true);
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
+
+  const { data, isFetching } = useQuery({
+    queryKey: ["geocode", debouncedSearchQuery],
+    queryFn: () => searchLocation(debouncedSearchQuery),
     refetchOnWindowFocus: false,
-    enabled: false, // run manually
+    enabled: debouncedSearchQuery.length > 0 && enabled,
   });
+  useEffect(() => {
+    if (data) {
+      setGeocodeResult(data);
+    }
+  }, [data]);
 
   const value = {
     setGeocodeResult,
     geocodeResult,
     searchQuery,
     setSearchQuery,
-    refetch,
     isFetching,
+    setEnabled,
+    enabled,
   };
   return (
     <GeocodingContext.Provider value={value}>
