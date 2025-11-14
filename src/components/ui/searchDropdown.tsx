@@ -1,7 +1,6 @@
 import { useContext, useRef } from "react";
 import { GeocodingContext } from "../../context/geocodeData";
 import ListComponent from "./listComponent";
-import { useClickOutside } from "../../hooks/useClickOutside";
 
 import type { GeocodeType } from "../../context/geocodeData";
 import LoadingIcon from "@/assets/images/icon-loading.svg?react";
@@ -11,20 +10,9 @@ type SearchDropdownProps = {
 };
 
 const SearchDropdown = ({ loading }: SearchDropdownProps) => {
-  const {
-    geocodeResult,
-    setGeocodeResult,
-    setSearchQuery,
-    setEnabled,
-    enabled,
-  } = useContext(GeocodingContext);
+  const { geocodeResult, setSearchQuery, setEnabled, enabled } =
+    useContext(GeocodingContext);
   const dropdownRef = useRef(null);
-
-  useClickOutside(dropdownRef, () => {
-    if (enabled) {
-      setGeocodeResult(null);
-    }
-  });
 
   const onSelect = (result: GeocodeType) => {
     setSearchQuery(`${result.name}, ${result.country}`);

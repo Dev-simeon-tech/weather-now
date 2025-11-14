@@ -16,18 +16,26 @@ const SearchForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (!searchQuery) return;
+
     const selectedResult = geocodeResult?.results.find(
       (result) =>
         `${result.name}, ${result.country}`.toLowerCase() ===
         searchQuery.toLowerCase()
     );
 
+    const firstResult = geocodeResult?.results[0];
+
     if (selectedResult) {
       setLocation({
         lat: selectedResult.latitude,
         lon: selectedResult.longitude,
+      });
+      setGeocodeResult(null);
+    } else if (firstResult) {
+      setLocation({
+        lat: firstResult.latitude,
+        lon: firstResult.longitude,
       });
       setGeocodeResult(null);
     }

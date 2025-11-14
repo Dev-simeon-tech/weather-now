@@ -62,6 +62,13 @@ export const GeocodingContextProvider = ({
     }
   }, [data]);
 
+  // clearing results when search query is empty
+  useEffect(() => {
+    if (!searchQuery) {
+      setGeocodeResult(null);
+    }
+  }, [searchQuery]);
+
   const value = {
     setGeocodeResult,
     geocodeResult,
